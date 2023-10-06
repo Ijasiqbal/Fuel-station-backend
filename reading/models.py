@@ -14,6 +14,7 @@ class Reading(models.Model):
     cash = models.IntegerField(null=True)
     card = models.IntegerField(null=True)
     paytm = models.IntegerField(null=True)
+    oil = models.IntegerField(null=True)
     credit = models.IntegerField(null=True)
     expected = models.IntegerField(null=True)
     received = models.IntegerField(null=True)
