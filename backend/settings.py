@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from datetime import timedelta
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -42,11 +43,32 @@ INSTALLED_APPS = [
     'corsheaders',
     'reading',
     'rest_framework',
+    'rest_framework_simplejwt',
     'transactions', 
     'employee',
     'creditors',
-    'prices'
+    'prices',
+    'LoginApp',
+    'sales',
 ]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}   
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': False,  
+    'BLACKLIST_AFTER_ROTATION': False,  
+    'UPDATE_LAST_LOGIN': False,
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
