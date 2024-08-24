@@ -11,11 +11,20 @@ class PriceList(APIView):
         return Response(serializer.data)
 
     def post(self, request):
-        serializer = PriceSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        prices = Price.objects.all()
+        if not prices:
+            serializer = PriceSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            price = prices[0]
+            serializer = PriceSerializer(price, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class PriceDetail(APIView):
     def get_object(self, pk):
