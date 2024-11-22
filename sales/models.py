@@ -12,7 +12,7 @@ class Sales(models.Model):
     credit = models.FloatField(null=True)
     closingBalance = models.FloatField(null=True)
     shortage = models.FloatField(null=True)
-    date = models.DateField(auto_now_add=True) 
+    date = models.DateField(null=True, blank=True)
     time = models.TimeField(auto_now_add=True)
 
     
