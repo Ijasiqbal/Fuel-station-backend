@@ -2,6 +2,10 @@ from django.db import models
 
 class Sales(models.Model):
     fuelSales = models.FloatField(null=True)
+    extraGreenSales = models.FloatField(null=True)
+    dieselSales = models.FloatField(null=True)
+    petrolSales = models.FloatField(null=True)
+    extraPremiumSales = models.FloatField(null=True)
     debit = models.FloatField(null=True)
     oil = models.FloatField(null=True)
     itemSales = models.FloatField(null=True)
